@@ -68,8 +68,8 @@ const NavigationBar = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <LoginSwitch activeAccountID={activeAccountID} />
       </Container>
-      <LoginSwitch activeAccountID={activeAccountID} />
     </Navbar>
   );
 };
