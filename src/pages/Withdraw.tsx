@@ -1,21 +1,16 @@
-import {
-  Card,
-  Button,
-  Form,
-  Stack,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
+import { useState } from "react";
+import { Card, Button, Form, Stack } from "react-bootstrap";
+import { format } from "date-fns";
 import { useFormik } from "formik";
+import { transactionAmountSchema } from "../validation/YupValidationSchemas";
 import { ETransactionType, ITransaction } from "../interfaces/interfaces";
 import {
   useStoreAccounts,
   useStoreActions,
   useStoreActiveAccountID,
 } from "../stores/useAccountsStore";
-import { useState } from "react";
-import { format } from "date-fns";
-import { transactionAmountSchema } from "../validation/YupValidationSchemas";
+import { InputAmount } from "./components/MvxInputs";
+import MvxToasts from "./components/MvxToasts";
 
 const Withdraw = () => {
   const accounts = useStoreAccounts();
@@ -69,24 +64,7 @@ const Withdraw = () => {
                   {activeAccount!.balance}$
                 </div>
               </Stack>
-
-              <Form.Group className="mb-3" controlId="formBasicDepositAmount">
-                <Form.Label>Withdraw Amount</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="amount"
-                  placeholder="Enter amount..."
-                  value={formik.values.amount}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.amount ? (
-                  <Form.Label style={{ color: "red" }}>
-                    {formik.errors.amount}
-                  </Form.Label>
-                ) : null}
-              </Form.Group>
-
+              <InputAmount formik={formik} objectName={"amount"} />
               <Button
                 variant="primary"
                 type="submit"
@@ -101,52 +79,30 @@ const Withdraw = () => {
       </Card>
 
       {!activeAccount?.history?.length ? null : (
-        <ToastContainer className="p-3" position={"top-end"}>
-          <Toast
-            onClose={() => setShowToast(false)}
-            show={showToast}
-            delay={5000}
-            autohide
-            bg="success"
-          >
-            <Toast.Header>
-              <strong className="me-auto">Bad Bank</strong>
-              <small>
-                {format(
-                  new Date(
-                    activeAccount?.history![
-                      activeAccount?.history!.length - 1
-                    ].date!
-                  ),
-                  "EE dd MMMM yyyy HH:mm:ss"
-                )}
-              </small>
-            </Toast.Header>
-            <Toast.Body className="text-white">{`Successfully withdrawn ${
-              activeAccount?.history![activeAccount?.history!.length - 1].amount
-            }$ from ${
-              activeAccount?.credentials?.fullName
-            }'s account!`}</Toast.Body>
-          </Toast>
-        </ToastContainer>
+        <MvxToasts
+          show={showToast}
+          setShow={setShowToast}
+          title={""}
+          date={format(
+            new Date(
+              activeAccount?.history![activeAccount?.history!.length - 1].date!
+            ),
+            "EE dd MMMM yyyy HH:mm:ss"
+          )}
+          body={`Successfully withdrawn ${
+            activeAccount?.history![activeAccount?.history!.length - 1].amount
+          }$ from ${activeAccount?.credentials?.fullName}'s account!`}
+          color={"success"}
+        />
       )}
-
-      <ToastContainer className="p-3" position={"top-end"}>
-        <Toast
-          onClose={() => setShowOverdraftAlert(false)}
-          show={showOverdraftAlert}
-          delay={5000}
-          autohide
-          bg="danger"
-        >
-          <Toast.Header>
-            <strong className="me-auto">Bad Bank Warning</strong>
-          </Toast.Header>
-          <Toast.Body className="text-white">
-            You can't withdraw more than your current balance!
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <MvxToasts
+        show={showOverdraftAlert}
+        setShow={setShowOverdraftAlert}
+        title={"Warning"}
+        date={null}
+        body={"You can't withdraw more than your current balance!"}
+        color={"danger"}
+      />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Layout from "./pages/root/Layout";
 import Login from "./pages/Login";
 import Withdraw from "./pages/Withdraw";
-import Auth from "./pages/components/Auth";
+import Auth from "./pages/root/Auth";
 import RestrictedAccessMsg from "./pages/root/RestrictedAccessMsg";
 
 function App() {

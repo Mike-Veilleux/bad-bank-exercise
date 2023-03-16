@@ -1,11 +1,20 @@
 import * as yup from "yup";
-import { ITransaction, IUserCredential } from "../interfaces/interfaces";
 
 const pwRules =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const emailSchema: yup.ObjectSchema<IUserCredential> = yup.object({
+export const createAccountSchema = yup.object({
   fullName: yup.string().required("Required"),
+  email: yup
+    .string()
+    .matches(pwRules, {
+      message: "Please enter a valid email",
+    })
+    .required("Required"),
+  password: yup.string().min(8).required("Required"),
+});
+
+export const loginAccountSchema = yup.object({
   email: yup
     .string()
     .matches(pwRules, {

@@ -1,22 +1,16 @@
-import {
-  Card,
-  Button,
-  Form,
-  Alert,
-  Stack,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
+import { useState } from "react";
+import { Card, Button, Form, Stack } from "react-bootstrap";
+import { format } from "date-fns";
 import { useFormik } from "formik";
+import { transactionAmountSchema } from "../validation/YupValidationSchemas";
 import { ETransactionType, ITransaction } from "../interfaces/interfaces";
 import {
   useStoreAccounts,
   useStoreActions,
   useStoreActiveAccountID,
 } from "../stores/useAccountsStore";
-import { useState } from "react";
-import { format } from "date-fns";
-import { transactionAmountSchema } from "../validation/YupValidationSchemas";
+import { InputAmount } from "./components/MvxInputs";
+import MvxToasts from "./components/MvxToasts";
 
 const Deposit = () => {
   const accounts = useStoreAccounts();
@@ -65,23 +59,7 @@ const Deposit = () => {
                   {activeAccount!.balance}$
                 </div>
               </Stack>
-              <Form.Group className="mb-3" controlId="formBasicDepositAmount">
-                <Form.Label>Deposit Amount</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="amount"
-                  placeholder="Enter amount..."
-                  value={formik.values.amount}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.errors.amount ? (
-                  <Form.Label style={{ color: "red" }}>
-                    {formik.errors.amount}
-                  </Form.Label>
-                ) : null}
-              </Form.Group>
-
+              <InputAmount formik={formik} objectName={"amount"} />
               <Button
                 variant="primary"
                 type="submit"
@@ -96,34 +74,19 @@ const Deposit = () => {
       </Card>
 
       {!activeAccount?.history?.length ? null : (
-        <ToastContainer className="p-3" position={"top-end"}>
-          <Toast
-            onClose={() => setShowToast(false)}
-            show={showToast}
-            delay={5000}
-            autohide
-            bg="success"
-          >
-            <Toast.Header>
-              <strong className="me-auto">Bad Bank</strong>
-              <small>
-                {format(
-                  new Date(
-                    activeAccount?.history![
-                      activeAccount?.history!.length - 1
-                    ].date!
-                  ),
-                  "EE dd MMMM yyyy HH:mm:ss"
-                )}
-              </small>
-            </Toast.Header>
-            <Toast.Body className="text-white">{`Succesfully deposited ${
-              activeAccount?.history![activeAccount?.history!.length - 1].amount
-            }$ to ${
-              activeAccount?.credentials?.fullName
-            }'s account!`}</Toast.Body>
-          </Toast>
-        </ToastContainer>
+        <MvxToasts
+          show={showToast}
+          setShow={setShowToast}
+          title={""}
+          date={format(
+            new Date(
+              activeAccount?.history![activeAccount?.history!.length - 1].date!
+            ),
+            "EE dd MMMM yyyy HH:mm:ss"
+          )}
+          body={"Sorry, this Email and Password do not match."}
+          color={"success"}
+        />
       )}
     </div>
   );
