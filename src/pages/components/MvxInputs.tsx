@@ -16,7 +16,7 @@ export const InputUserName = ({ formik, objectName }: PrivateProps) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      <InputValidationError formik={formik} objectName={objectName} />
+      <InputValidationErrorAndTouch formik={formik} objectName={objectName} />
     </Form.Group>
   );
 };
@@ -33,7 +33,7 @@ export const InputEmail = ({ formik, objectName }: PrivateProps) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      <InputValidationError formik={formik} objectName={objectName} />
+      <InputValidationErrorAndTouch formik={formik} objectName={objectName} />
     </Form.Group>
   );
 };
@@ -50,7 +50,7 @@ export const InputPassword = ({ formik, objectName }: PrivateProps) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      <InputValidationError formik={formik} objectName={objectName} />
+      <InputValidationErrorAndTouch formik={formik} objectName={objectName} />
     </Form.Group>
   );
 };
@@ -72,11 +72,23 @@ export const InputAmount = ({ formik, objectName }: PrivateProps) => {
   );
 };
 
-const InputValidationError = ({ formik, objectName }: PrivateProps) => {
+const InputValidationErrorAndTouch = ({ formik, objectName }: PrivateProps) => {
   return (
     <>
       {formik.errors[objectName] && formik.touched[objectName] ? (
-        <Form.Label style={{ color: "red", fontSize: "0.7em" }}>
+        <Form.Label style={{ color: "red", fontSize: "0.9em" }}>
+          {formik.errors[objectName]}
+        </Form.Label>
+      ) : null}
+    </>
+  );
+};
+
+const InputValidationError = ({ formik, objectName }: PrivateProps) => {
+  return (
+    <>
+      {formik.errors[objectName] ? (
+        <Form.Label style={{ color: "red", fontSize: "0.9em" }}>
           {formik.errors[objectName]}
         </Form.Label>
       ) : null}
