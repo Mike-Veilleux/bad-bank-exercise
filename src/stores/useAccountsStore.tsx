@@ -54,3 +54,7 @@ export const useStoreAccounts = () =>
 export const useStoreActiveAccountID = () =>
   useAccountStore((state) => state.activeAccountID);
 export const useStoreActions = () => useAccountStore((state) => state.actions);
+
+if (process.env.NODE_ENV === "development") {
+  mountStoreDevtool("Accounts", useAccountStore);
+}

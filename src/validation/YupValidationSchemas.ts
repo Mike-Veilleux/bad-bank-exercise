@@ -29,7 +29,7 @@ export const transactionAmountSchema = yup.object({
     .number()
     .positive("Amount must be a positive number")
     .required("Required")
-    .test("Is whole numbers", "Only whole numbers accepted", (value) =>
+    .test("Is whole numbers", "Only whole numbers are accepted", (value) =>
       Number.isInteger(value)
     ),
 });

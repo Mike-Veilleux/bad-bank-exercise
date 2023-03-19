@@ -49,8 +49,12 @@ const Login = () => {
             Login into your accout to access our services.
           </Card.Text>
           <Form onSubmit={formik.handleSubmit}>
-            <InputEmail formik={formik} objectName={"email"} />
-            <InputPassword formik={formik} objectName={"password"} />
+            <InputEmail formik={formik} objectName={"email"} label={"Email"} />
+            <InputPassword
+              formik={formik}
+              objectName={"password"}
+              label={"Password"}
+            />
             <Button
               variant="primary"
               type="submit"

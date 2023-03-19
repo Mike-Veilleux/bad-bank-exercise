@@ -59,7 +59,11 @@ const Deposit = () => {
                   {activeAccount!.balance}$
                 </div>
               </Stack>
-              <InputAmount formik={formik} objectName={"amount"} />
+              <InputAmount
+                formik={formik}
+                objectName={"amount"}
+                label={"Deposit Amount"}
+              />
               <Button
                 variant="primary"
                 type="submit"
@@ -84,7 +88,9 @@ const Deposit = () => {
             ),
             "EE dd MMMM yyyy HH:mm:ss"
           )}
-          body={"Sorry, this Email and Password do not match."}
+          body={`Successfully deposited ${
+            activeAccount?.history![activeAccount?.history!.length - 1].amount
+          }$ in ${activeAccount?.credentials?.fullName}'s account!`}
           color={"success"}
         />
       )}

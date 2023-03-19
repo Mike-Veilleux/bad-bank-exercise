@@ -60,12 +60,13 @@ const AllData = () => {
               In the table below, you will find all of our user's account data.
             </Card.Text>
             <Card.Text className="text-muted text-center">
-              To make sure we are the least secure bank available we also store
-              all data in the browser’s local storage for your convenience.
+              To make sure that we are the least secure bank available, we also
+              store all data in the browser’s local storage for your
+              convenience.
             </Card.Text>
             <Card.Text className="text-muted text-center">
-              You can check their transaction history as well as login into
-              their account.
+              You can check other users' transaction history, as well as login
+              into their account.
             </Card.Text>
             <Table className="" striped bordered hover>
               <thead style={{ backgroundColor: "#303030", color: "#ebebeb" }}>

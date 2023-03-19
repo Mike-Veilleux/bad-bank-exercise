@@ -16,11 +16,11 @@ const Home = () => {
         <Card.Text style={{ padding: "20px", textAlign: "justify" }}>
           <p>
             At Bad Bank, we have total disregard for your privacy. All data will
-            be stored in your browser local storage for everyone's convinience.{" "}
-            <br />
+            be stored in your browser's local storage, for everyone's
+            convenience. <br />
             <br />
             Our upcoming fullstack developer Mike, is quickly learning about
-            backend and database technology. <br />
+            back-end and database technology. <br />
             <br />
             <strong>So hurry up, this is a limited offer!</strong>
           </p>

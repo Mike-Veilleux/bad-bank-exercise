@@ -62,9 +62,18 @@ const CreateAccount = () => {
           </Card.Text>
 
           <Form onSubmit={formik.handleSubmit}>
-            <InputUserName formik={formik} objectName={"fullName"} />
-            <InputEmail formik={formik} objectName={"email"} />
-            <InputPassword formik={formik} objectName={"password"} />
+            <InputUserName
+              formik={formik}
+              objectName={"fullName"}
+              label={"Name"}
+            />
+            <InputEmail formik={formik} objectName={"email"} label={"Email"} />
+
+            <InputPassword
+              formik={formik}
+              objectName={"password"}
+              label={"Password"}
+            />
             <Button
               variant="primary"
               type="submit"

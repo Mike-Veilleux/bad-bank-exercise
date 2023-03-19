@@ -36,7 +36,7 @@ const HistoryModal = ({ account, show, setShow }: HistoryModalProps) => {
         keyboard={false}
       >
         <Modal.Header>
-          <Modal.Title>{`${account?.credentials?.fullName}'s Transactions History `}</Modal.Title>
+          <Modal.Title>{`${account?.credentials?.fullName}'s Transaction History `}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover>

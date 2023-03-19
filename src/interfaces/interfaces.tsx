@@ -4,9 +4,9 @@ export interface IUserCredential {
   password: string | undefined;
 }
 
-export interface ICreateAccountForm extends IUserCredential {
-  accountExist: string | undefined;
-}
+// export interface ICreateAccountForm extends IUserCredential {
+//   accountExist: string | undefined;
+// }
 
 export interface ILogin {
   email?: string | undefined;

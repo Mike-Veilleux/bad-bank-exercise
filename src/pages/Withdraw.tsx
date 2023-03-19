@@ -64,7 +64,11 @@ const Withdraw = () => {
                   {activeAccount!.balance}$
                 </div>
               </Stack>
-              <InputAmount formik={formik} objectName={"amount"} />
+              <InputAmount
+                formik={formik}
+                objectName={"amount"}
+                label={"Withdrawal Amount"}
+              />
               <Button
                 variant="primary"
                 type="submit"
